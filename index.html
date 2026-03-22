@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samosir Info — Surga di Tengah Danau Toba</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-deep: #0B2D45;
+    --blue-mid: #1A5276;
+    --blue-lake: #2980B9;
+    --blue-light: #AED6F1;
+    --gold: #D4A017;
+    --gold-light: #F5CBA7;
+    --sand: #FAF3E0;
+    --text-dark: #1C1C1C;
+    --text-mid: #4A4A4A;
+    --text-muted: #888;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(11, 45, 69, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 0.03em;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--blue-deep) !important;
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-weight: 500 !important;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: 
+      linear-gradient(to bottom, rgba(11,45,69,0.65) 0%, rgba(11,45,69,0.3) 50%, rgba(11,45,69,0.7) 100%),
+      url('https://images.unsplash.com/photo-1586996292898-71f4036c4e07?w=1600&q=80') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(212,160,23,0.2);
+    border: 1px solid rgba(212,160,23,0.5);
+    color: var(--gold-light);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 2px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 88px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    max-width: 900px;
+    animation: fadeUp 0.9s ease 0.1s both;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 300;
+    max-width: 520px;
+    line-height: 1.7;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+
+  .hero-actions {
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 1s ease 0.3s both;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--blue-deep);
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-primary:hover { background: #BF8C12; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    border: 1px solid rgba(255,255,255,0.45);
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeIn 1s ease 1s both;
+  }
+
+  .hero-scroll span {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ─── STATS STRIP ─── */
+  .stats {
+    background: var(--blue-deep);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-top: 6px;
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 96px 48px; }
+
+  .section-tag {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blue-lake);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 46px);
+    font-weight: 700;
+    color: var(--blue-deep);
+    line-height: 1.2;
+    max-width: 640px;
+  }
+
+  .section-title em { font-style: italic; color: var(--blue-lake); }
+
+  /* ─── KATEGORI ─── */
+  .kategori {
+    background: var(--sand);
+    text-align: center;
+  }
+
+  .kategori .section-title { margin: 0 auto 16px; }
+
+  .kategori-sub {
+    color: var(--text-mid);
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 56px;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(11,45,69,0.12); }
+
+  .card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    background: var(--blue-light);
+  }
+
+  .card-body { padding: 20px; }
+
+  .card-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .card-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--blue-lake);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+
+  .card-link::after { content: ' →'; }
+
+  /* ─── FITUR UNGGULAN ─── */
+  .fitur {
+    background: var(--white);
+  }
+
+  .fitur-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .fitur-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 8px;
+    background: var(--blue-light);
+    display: block;
+  }
+
+  .fitur-content .section-tag { display: block; }
+
+  .fitur-list {
+    margin-top: 32px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .fitur-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .fitur-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+
+  .fitur-item-text strong {
+    display: block;
+    font-size: 15px;
+    color: var(--blue-deep);
+    margin-bottom: 2px;
+  }
+
+  .fitur-item-text span {
+    font-size: 14px;
+    color: var(--text-mid);
+    font-weight: 300;
+  }
+
+  /* ─── WISATA HIGHLIGHT ─── */
+  .wisata {
+    background: var(--blue-deep);
+    color: var(--white);
+  }
+
+  .wisata .section-tag { color: var(--gold); }
+  .wisata .section-title { color: var(--white); max-width: 500px; }
+
+  .wisata-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    max-width: 1100px;
+    margin: 0 auto 48px;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .wisata-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .wisata-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--blue-mid);
+  }
+
+  .wisata-card:first-child {
+    grid-row: 1 / 3;
+  }
+
+  .wisata-card img, .wisata-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .wisata-card:first-child .wisata-placeholder { min-height: 420px; }
+
+  .wisata-placeholder {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+
+  .wisata-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(11,45,69,0.85) 0%, transparent 55%);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .wisata-tag {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+
+  .wisata-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .wisata-card:first-child .wisata-name { font-size: 28px; }
+
+  /* Color blocks for placeholder images */
+  .bg-1 { background: linear-gradient(135deg, #1A5276, #0B2D45); }
+  .bg-2 { background: linear-gradient(135deg, #0E6655, #0B2D45); }
+  .bg-3 { background: linear-gradient(135deg, #784212, #1A5276); }
+  .bg-4 { background: linear-gradient(135deg, #4A235A, #1A5276); }
+  .bg-5 { background: linear-gradient(135deg, #1F618D, #0B2D45); }
+
+  /* ─── ADAT ISTIADAT ─── */
+  .adat {
+    background: var(--sand);
+  }
+
+  .adat-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .adat-header {
+    margin-bottom: 48px;
+  }
+
+  .adat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+  }
+
+  .adat-card {
+    background: var(--white);
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 8px;
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .adat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(11,45,69,0.1); }
+
+  .adat-icon { font-size: 32px; margin-bottom: 16px; }
+
+  .adat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 8px;
+  }
+
+  .adat-desc {
+    font-size: 14px;
+    color: var(--text-mid);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* ─── NEWSLETTER ─── */
+  .newsletter {
+    background: linear-gradient(135deg, var(--blue-deep) 0%, var(--blue-mid) 100%);
+    text-align: center;
+    padding: 80px 48px;
+  }
+
+  .newsletter h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .newsletter h2 em { font-style: italic; color: var(--gold); }
+
+  .newsletter p {
+    color: rgba(255,255,255,0.7);
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 12px;
+    max-width: 480px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    min-width: 200px;
+    padding: 14px 18px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.45); }
+  .newsletter-form input:focus { border-color: var(--gold); }
+
+  /* ─── SOCIAL ─── */
+  .social {
+    background: var(--white);
+    text-align: center;
+    padding: 64px 48px;
+  }
+
+  .social p {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all 0.2s;
+    background: var(--white);
+  }
+
+  .social-btn:hover { border-color: var(--blue-lake); color: var(--blue-lake); }
+  .social-btn.ig:hover { border-color: #C13584; color: #C13584; }
+  .social-btn.fb:hover { border-color: #1877F2; color: #1877F2; }
+
+  .social-icon { font-size: 18px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--blue-deep);
+    color: rgba(255,255,255,0.6);
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--white);
+  }
+
+  .footer-logo span { color: var(--gold); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-copy { font-size: 13px; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 72px 24px; }
+    .stats { padding: 32px 24px; gap: 32px; }
+    .fitur-inner { grid-template-columns: 1fr; gap: 40px; }
+    .wisata-grid { grid-template-columns: 1fr 1fr; }
+    .wisata-card:first-child { grid-column: 1 / 3; grid-row: auto; }
+    footer { flex-direction: column; text-align: center; padding: 40px 24px; }
+    .wisata-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Samosir<span>Info</span></div>
+  <ul class="nav-links">
+    <li><a href="#pariwisata">Pariwisata</a></li>
+    <li><a href="#kuliner">Kuliner</a></li>
+    <li><a href="#adat">Adat Istiadat</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#newsletter" class="nav-cta">Berlangganan</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="beranda">
+  <div class="hero-badge">Pulau Samosir · Danau Toba · Sumatera Utara</div>
+  <h1>Surga di Tengah<br><em>Danau Toba</em></h1>
+  <p class="hero-sub">Informasi terlengkap & terupdate tentang pariwisata, kuliner, dan adat budaya Samosir untuk warga dan wisatawan.</p>
+  <div class="hero-actions">
+    <a href="#pariwisata" class="btn-primary">Jelajahi Samosir</a>
+    <a href="#newsletter" class="btn-outline">Ikuti Update Kami</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Gulir</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <div class="stat-num">630</div>
+    <div class="stat-label">km² Luas Pulau</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">50+</div>
+    <div class="stat-label">Destinasi Wisata</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">1.170</div>
+    <div class="stat-label">mdpl Ketinggian Toba</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">6</div>
+    <div class="stat-label">Kecamatan</div>
+  </div>
+</div>
+
+<!-- KATEGORI -->
+<section class="kategori" id="kategori">
+  <div class="section-tag">Eksplorasi</div>
+  <h2 class="section-title">Semua yang Perlu Kamu Tahu tentang <em>Samosir</em></h2>
+  <p class="kategori-sub">Temukan informasi lengkap dari pariwisata hingga kekayaan budaya Batak Toba.</p>
+
+  <div class="cards-grid">
+    <div class="card" id="pariwisata">
+      <div class="card-img bg-1" style="display:flex;align-items:center;justify-content:center;font-size:56px;">🏝️</div>
+      <div class="card-body">
+        <div class="card-icon">🏞️</div>
+        <div class="card-title">Pariwisata</div>
+        <p class="card-desc">Danau Toba, Bukit Holbung, Batu Gantung, Menara Pandang Tele, hingga desa-desa wisata yang memukau di setiap sudut pulau.</p>
+        <a href="#wisata" class="card-link">Lihat Destinasi</a>
+      </div>
+    </div>
+
+    <div class="card" id="kuliner">
+      <div class="card-img bg-2" style="display:flex;align-items:center;justify-content:center;font-size:56px;">🍽️</div>
+      <div class="card-body">
+        <div class="card-icon">🍛</div>
+        <div class="card-title">Kuliner</div>
+        <p class="card-desc">Arsik ikan, Naniura, Saksang, Ubi Tumbuk, dan cita rasa khas Batak yang telah diwariskan turun-temurun dari generasi ke generasi.</p>
+        <a href="#" class="card-link">Lihat Kuliner</a>
+      </div>
+    </div>
+
+    <div class="card" id="adat">
+      <div class="card-img bg-3" style="display:flex;align-items:center;justify-content:center;font-size:56px;">🪘</div>
+      <div class="card-body">
+        <div class="card-icon">🏺</div>
+        <div class="card-title">Adat Istiadat</div>
+        <p class="card-desc">Upacara Mangokkal Holi, Tor-tor, Gondang Sabangunan, dan sistem kekerabatan Dalihan Natolu yang menjadi fondasi masyarakat Batak.</p>
+        <a href="#adat-section" class="card-link">Jelajahi Budaya</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-img bg-4" style="display:flex;align-items:center;justify-content:center;font-size:56px;">📅</div>
+      <div class="card-body">
+        <div class="card-icon">🎉</div>
+        <div class="card-title">Event & Festival</div>
+        <p class="card-desc">Festival Danau Toba, Pesta Budaya Horas Samosir, dan berbagai kegiatan adat serta festival musik tahunan yang meriah dan berkesan.</p>
+        <a href="#" class="card-link">Lihat Kalender</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FITUR UNGGULAN -->
+<section class="fitur">
+  <div class="fitur-inner">
+    <div class="bg-1" style="aspect-ratio:4/3;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:80px;">🌊</div>
+    <div class="fitur-content">
+      <span class="section-tag">Mengapa SamosirInfo?</span>
+      <h2 class="section-title">Platform Informasi <em>Terpercaya</em> untuk Samosir</h2>
+      <ul class="fitur-list">
+        <li class="fitur-item">
+          <div class="fitur-dot"></div>
+          <div class="fitur-item-text">
+            <strong>Informasi Terupdate Setiap Hari</strong>
+            <span>Berita terkini seputar wisata, acara, dan kondisi Pulau Samosir dari sumber terpercaya.</span>
+          </div>
+        </li>
+        <li class="fitur-item">
+          <div class="fitur-dot"></div>
+          <div class="fitur-item-text">
+            <strong>Dibuat oleh Warga Lokal</strong>
+            <span>Konten kami dikurasi langsung oleh komunitas Samosir agar akurat dan autentik.</span>
+          </div>
+        </li>
+        <li class="fitur-item">
+          <div class="fitur-dot"></div>
+          <div class="fitur-item-text">
+            <strong>Panduan Lengkap untuk Wisatawan</strong>
+            <span>Dari rute perjalanan, akomodasi, kuliner, hingga tips wisata budaya yang ramah untuk semua.</span>
+          </div>
+        </li>
+        <li class="fitur-item">
+          <div class="fitur-dot"></div>
+          <div class="fitur-item-text">
+            <strong>Hadir di Media Sosial</strong>
+            <span>Ikuti kami di Instagram dan Facebook untuk update harian dan konten visual yang memukau.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- WISATA HIGHLIGHT -->
+<section class="wisata" id="wisata">
+  <div class="wisata-header">
+    <div>
+      <div class="section-tag">Destinasi Terpopuler</div>
+      <h2 class="section-title">Jelajahi Keindahan <em>Alam Samosir</em></h2>
+    </div>
+    <a href="#" class="btn-outline" style="white-space:nowrap;font-size:13px;padding:10px 24px;">Lihat Semua →</a>
+  </div>
+  <div class="wisata-grid">
+    <div class="wisata-card">
+      <div class="wisata-placeholder bg-1" style="min-height:420px;display:flex;align-items:flex-end;"></div>
+      <div class="wisata-overlay">
+        <div class="wisata-tag">Wisata Alam</div>
+        <div class="wisata-name">Danau Toba & Pulau Samosir</div>
+      </div>
+    </div>
+    <div class="wisata-card">
+      <div class="wisata-placeholder bg-2"></div>
+      <div class="wisata-overlay">
+        <div class="wisata-tag">Bukit</div>
+        <div class="wisata-name">Bukit Holbung</div>
+      </div>
+    </div>
+    <div class="wisata-card">
+      <div class="wisata-placeholder bg-3"></div>
+      <div class="wisata-overlay">
+        <div class="wisata-tag">Situs Budaya</div>
+        <div class="wisata-name">Batu Kursi Siallagan</div>
+      </div>
+    </div>
+    <div class="wisata-card">
+      <div class="wisata-placeholder bg-4"></div>
+      <div class="wisata-overlay">
+        <div class="wisata-tag">Geologi</div>
+        <div class="wisata-name">Batu Gantung</div>
+      </div>
+    </div>
+    <div class="wisata-card">
+      <div class="wisata-placeholder bg-5"></div>
+      <div class="wisata-overlay">
+        <div class="wisata-tag">Pemandangan</div>
+        <div class="wisata-name">Menara Pandang Tele</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADAT ISTIADAT -->
+<section class="adat" id="adat-section">
+  <div class="adat-inner">
+    <div class="adat-header">
+      <div class="section-tag">Kekayaan Budaya</div>
+      <h2 class="section-title">Adat Istiadat <em>Batak Toba</em></h2>
+      <p style="margin-top:12px;color:var(--text-mid);font-weight:300;max-width:520px;line-height:1.7;">
+        Samosir adalah jantung peradaban Batak Toba. Warisan leluhur yang masih hidup dan dilestarikan hingga hari ini.
+      </p>
+    </div>
+    <div class="adat-grid">
+      <div class="adat-card">
+        <div class="adat-icon">🥁</div>
+        <div class="adat-title">Gondang Sabangunan</div>
+        <p class="adat-desc">Musik sakral Batak yang dimainkan dalam upacara adat. Kumpulan gondang (gendang) dan taganing yang menghasilkan harmoni khas.</p>
+      </div>
+      <div class="adat-card">
+        <div class="adat-icon">💃</div>
+        <div class="adat-title">Tari Tor-Tor</div>
+        <p class="adat-desc">Tarian ritual khas Batak yang mengandung makna spiritual mendalam, diiringi musik gondang dalam setiap upacara penting.</p>
+      </div>
+      <div class="adat-card">
+        <div class="adat-icon">🏺</div>
+        <div class="adat-title">Mangokkal Holi</div>
+        <p class="adat-desc">Upacara pemindahan tulang leluhur ke tempat yang lebih mulia, sebagai bentuk penghormatan tertinggi kepada nenek moyang.</p>
+      </div>
+      <div class="adat-card">
+        <div class="adat-icon">🤝</div>
+        <div class="adat-title">Dalihan Natolu</div>
+        <p class="adat-desc">Sistem kekerabatan tiga tungku yang menjadi landasan filosofi sosial masyarakat Batak: Somba Marhula, Manat Mardongan Tubu, Elek Marboru.</p>
+      </div>
+      <div class="adat-card">
+        <div class="adat-icon">🧣</div>
+        <div class="adat-title">Ulos</div>
+        <p class="adat-desc">Kain tenun sakral Batak yang diberikan dalam berbagai momen kehidupan — kelahiran, pernikahan, hingga kematian sebagai simbol cinta kasih.</p>
+      </div>
+      <div class="adat-card">
+        <div class="adat-icon">🏛️</div>
+        <div class="adat-title">Rumah Adat Batak</div>
+        <p class="adat-desc">Ruma Gorga dengan ukiran ornamen khas Batak yang sarat makna. Arsitektur tradisional yang mencerminkan kosmologi dan identitas budaya.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <h2>Tetap Terhubung dengan <em>Samosir</em></h2>
+  <p>Dapatkan update terbaru tentang wisata, kuliner, dan acara budaya langsung di inbox kamu.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Masukkan email kamu..." />
+    <a href="#" class="btn-primary" style="white-space:nowrap;">Berlangganan</a>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social">
+  <div class="section-tag" style="text-transform:uppercase;letter-spacing:0.1em;font-size:11px;color:var(--blue-lake);margin-bottom:8px;">Ikuti Kami</div>
+  <p>Update harian, foto indah, dan cerita dari Pulau Samosir tersedia di:</p>
+  <div class="social-links">
+    <a href="#" class="social-btn ig">
+      <span class="social-icon">📸</span>
+      @samosirinfo
+      <span style="font-size:11px;color:var(--text-muted);font-weight:400;">Instagram</span>
+    </a>
+    <a href="#" class="social-btn fb">
+      <span class="social-icon">📘</span>
+      Samosir Info
+      <span style="font-size:11px;color:var(--text-muted);font-weight:400;">Facebook</span>
+    </a>
+    <a href="#" class="social-btn">
+      <span class="social-icon">🌐</span>
+      samosirinfo.id
+      <span style="font-size:11px;color:var(--text-muted);font-weight:400;">Website</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Samosir<span>Info</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Pariwisata</a></li>
+    <li><a href="#">Kuliner</a></li>
+    <li><a href="#">Adat Budaya</a></li>
+    <li><a href="#">Event</a></li>
+    <li><a href="#">Tentang Kami</a></li>
+    <li><a href="#">Kontak</a></li>
+  </ul>
+  <div class="footer-copy">© 2025 SamosirInfo · Horas!</div>
+</footer>
+
+</body>
+</html>
